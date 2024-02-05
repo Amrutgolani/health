@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="vh-100" style="margin: 100px 0px 0px 0px; width: auto;">
+  <div style="text-align: center;">
+    <!-- <p class="lead fw-normal mb-0 me-3"><h1></h1> </p> -->
+  </div>
+    <div class="container h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+              
+            </div>
+            <!-- Email input -->
+            <div class="full field form-outline mb-4" id="email-sec">
+              <label class="form-label" for="form3Example3">Enter Your E-mail :</label>
+              <input type="email" id="email" class="form-control form-control-lg"
+                placeholder="Enter a valid email" name="email">
+              
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <div class="full field form-outline mb-4" id="otp-sec">
+                <label class="form-label" for="form3Example3">Enter Your OTP :</label>
+                <input type="numbers" class="form-control form-control-lg"
+                  placeholder="Enter OTP" name="OTP">
+              
+            </div>
+  
+            <div class="align-items-center">
+              <!-- Checkbox -->
+              <div class="form-check mb-0">
+  
+                <div class="text-center text-lg-start mt-1 pt-2 full field">
+                    <button type="submit" class="button btn btn-outline-info"
+                      style="padding-left: 2rem; padding-right: 2rem; margin-right: 30px;">SUBMIT</button>
+                </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- end section -->
+
+<script>
+    const queryString = window.location.search;
+console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+    const OTP = urlParams.has('otp')
+    if (OTP){
+        document.getElementById("email-sec").style.display = "none";
+        document.getElementById("otp-sec").style.display = "block";
+    }
+    else{
+        document.getElementById("email-sec").style.display = "block";
+        document.getElementById("otp-sec").style.display = "none";
+    }
+</script>
+{% comment %} <script src="https://code.jquery.com/jquery-3.5.1.js" 
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+            crossorigin="anonymous"></script> 
+  
+    <script type="text/javascript"> 
+    $(document).on('submit','#forgot-pass',function(e){ 
+        e.preventDefault(); 
+        $.ajax({ 
+            type:'POST', 
+            url:'{% url "forgotpass" %}', 
+            data: 
+            { 
+                task:$("#email").val(), 
+                csrfmiddlewaretoken: '{%csrf_token%}'
+
+            }, 
+            success:function(){ 
+                  alert('Saved'); 
+                    } 
+                },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+              }) 
+        }); 
+    </script>  {% endcomment %}
+{% endblock %}
+<!-- end section -->
